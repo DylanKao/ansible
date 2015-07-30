@@ -9,7 +9,6 @@
   mysql_user: user=root
               password=root
               host=localhost
-  sudo: yes
 
 # - name: Download Jira
   # get_url: url={{ jiraUrl }}
