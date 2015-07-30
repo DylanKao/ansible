@@ -3,9 +3,7 @@
 - name: install mysql and related packages
   yum: pkg={{ item }}
        state=present
-  with_items:
-    - mysql
-    - mysql-server
+  with_items: mysql_packages
 
 - name: set the mysql root password
   mysql_user: user=root
