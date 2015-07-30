@@ -2,10 +2,6 @@
 # install MySQL 
 - name: Install Mysql
   apt: pkg=mysql-server state=latest
- 
-# Set root password 
-- name: Mysql | Set root password
-    shell: debconf-set-selections
 
 # - name: Download Jira
   # get_url: url={{ jiraUrl }}
