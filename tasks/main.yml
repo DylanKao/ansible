@@ -27,11 +27,10 @@
   sudo: yes
 
 
-  #Doesn't appear to be working yet
+#Doesn't appear to be working yet
 
 - name: Copy Jira dbconfig File
-  template: src=dbconfig.xml.j2
-  dest=/var/atlassian/application-data/jira/dbconfig.xml
+  template: src=dbconfig.xml.j2 dest=/var/atlassian/application-data/jira/dbconfig.xml
         owner=root	
         group=root	
         mode=0777
