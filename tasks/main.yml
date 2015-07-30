@@ -27,11 +27,11 @@
   sudo: yes
 
 
-  Doesn't appear to be working yet
+  #Doesn't appear to be working yet
 
 - name: Copy Jira dbconfig File
   template: src=dbconfig.xml.j2
-             owner=jira
+            owner=jira
             group=jira
             mode=0664
   sudo: yes
