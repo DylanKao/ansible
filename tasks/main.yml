@@ -1,8 +1,16 @@
 ---
 # install MySQL 
-- name: Ensure MySQL packages are installed.
-  yum: "name={{ item }} state=installed enablerepo={{ mysql_enablerepo }}"
-  with_items: mysql_packages
+- name: install mysql and related packages
+  yum: pkg={{ item }}
+       state=present
+  with_items:
+    - mysql
+    - mysql-server
+
+- name: set the mysql root password
+  mysql_user: user=root
+              password=root
+              host=localhost
 
 # - name: Download Jira
   # get_url: url={{ jiraUrl }}
