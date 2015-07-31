@@ -21,16 +21,16 @@
               password={{ mysqlPasswd }}
               host=localhost
   
-# - name: Copy Jira DB backup
-  # copy: src=/etc/ansible/roles/ansible/templates/jira.sql
-            # dest=/tmp/jira.sql owner=root group=root  mode=0777
-  # sudo: yes
+- name: Copy Jira DB backup
+  copy: src=/etc/ansible/roles/ansible/templates/jira.sql
+            dest=/tmp/jira.sql owner=root group=root  mode=0777
+  sudo: yes
   
 - name: Create a new database with name 'jira'
   mysql_db: name=jira state=present login_user={{ mysqlUser }} login_password={{ mysqlPasswd }}
   
-# - name: Imports jira.sql similiar to mysql
-  # mysql_db: state=import name=jira target=/tmp/jira.sql login_user={{ mysqlUser }} login_password={{ mysqlPasswd }}
+- name: Imports jira.sql similiar to mysql
+  mysql_db: state=import name=jira target=/tmp/jira.sql login_user={{ mysqlUser }} login_password={{ mysqlPasswd }}
   
 - name: Set the FireWall Stop
   raw: /etc/init.d/iptables stop
