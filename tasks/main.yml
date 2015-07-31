@@ -10,8 +10,6 @@
 # - name: Install the latest version of MySQL Python
   # yum: name=MySQL-python state=latest
   
-- mysql_user: name=bob password=12345 priv=*.*:ALL state=present
-  
 # - name: Copy Jira DB backup
   # copy: src=/etc/ansible/roles/ansible/templates/jira.sql
             # dest=/tmp/jira.sql owner=root group=root  mode=0777
@@ -23,10 +21,10 @@
 # - name: Imports jira.sql similiar to mysql
   # mysql_db: state=import name=jira target=/tmp/jira.sql login_user=root login_password=root
 
-# - name: set the mysql root password
-  # mysql_user: name=root
-              # password=root1
-              # host=localhost
+- name: set the mysql root password
+  mysql_user: name=root
+              password=root1
+              host=localhost
 
 # - name: Download Jira
   # get_url: url={{ jiraUrl }}
