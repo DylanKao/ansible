@@ -11,8 +11,8 @@
   # yum: name=MySQL-python state=latest
   
 - name: Copy Jira DB backup
-  template: src={{ jiraDBBackup }}
-            dest=/tmp/jira.sql
+  template: src=jira.sql.j2
+            dest=/tmp/jira.sql owner=root group=root  mode=0777
   sudo: yes
   
 - name: Imports jira.sql similiar to mysql
