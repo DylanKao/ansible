@@ -22,7 +22,7 @@
               # host=localhost
   
 - name: Copy db backup
-  template: src={{ porjectHome }}/template/jira.sql dest=/tmp/jira.sql owner=root group=root  mode=0777
+  template: src={{ porjectHome }}/templates/jira.sql dest=/tmp/jira.sql owner=root group=root  mode=0777
   
 # - name: Create a new database with name 'jira'
   # mysql_db: name=jira state=present login_user={{ mysqlUser }} login_password={{ mysqlPasswd }}
