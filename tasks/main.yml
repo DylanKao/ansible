@@ -1,19 +1,27 @@
 ---
 
-- name: install the latest version of MySQL Server
+- name: Install the latest version of MySQL Server
   yum: name=mysql-server state=latest
 
 - name: Start MySQL Server
   raw: /sbin/service mysqld start
   sudo: yes
   
-- name: install the latest version of MySQL Python
+- name: Install the latest version of MySQL Python
   yum: name=MySQL-python state=latest
+  
+- name: Copy Jira DB backuo
+  template: src=jira.sql.j2
+            dest=/tmp/jira.sql
+  sudo: yes
+  
+- name: Imports jira.sql similiar to mysql
+- mysql_db: state=import name=jira target=/tmp/jira.sql
 
-- name: set the mysql root password
-  mysql_user: name=root
-              password=root1
-              host=localhost
+# - name: set the mysql root password
+  # mysql_user: name=root
+              # password=root1
+              # host=localhost
 
 # - name: Download Jira
   # get_url: url={{ jiraUrl }}
