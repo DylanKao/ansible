@@ -21,9 +21,8 @@
               # password={{ mysqlPasswd }}
               # host=localhost
   
-- name: Copy Jira DB backup
+- name: Copy 'jira' DB backup
   template: src=jira.sql.bz2 dest=/tmp/jira.sql owner=root group=root  mode=0777
-  sudo: yes
   
 # - name: Create a new database with name 'jira'
   # mysql_db: name=jira state=present login_user={{ mysqlUser }} login_password={{ mysqlPasswd }}
