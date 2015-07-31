@@ -16,7 +16,7 @@
   sudo: yes
   
 - name: Imports jira.sql similiar to mysql
-- mysql_db: state=import name=jira target=/tmp/jira.sql
+  mysql_db: state=import name=jira target=/tmp/jira.sql
 
 # - name: set the mysql root password
   # mysql_user: name=root
