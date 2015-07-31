@@ -3,6 +3,9 @@
 - name: install the latest version of MySQL Server
   yum: name=mysql-server state=latest
 
+- name: Start MySQL Server
+  raw: /sbin/service mysqld start
+  sudo: yes
 
 - name: set the mysql root password
   mysql_user: user=root
