@@ -5,7 +5,7 @@ jiraHome: /var/atlassian/application-data/jira
 jiraData: /opt/atlassian/jira
 jiraHttp: 8080
 jiraExec: atlassian-jira-6.3.13-x64.bin
-jiraDBBackup: jira.sql.j2
+jiraDBBackup: jira.sql
 jiraUrl: https://www.atlassian.com/software/jira/downloads/binary/{{ jiraExec }}
 mysqlHost: localhost
 mysqlPort: 3306

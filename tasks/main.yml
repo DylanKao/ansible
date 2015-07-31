@@ -17,8 +17,8 @@
   yum: name=MySQL-python state=latest
   
 - name: Set the mysql root password
-  mysql_user: name=root
-              password=root
+  mysql_user: name={{ mysqlUser }}
+              password={{ mysqlPasswd }}
               host=localhost
   
 - name: Copy Jira DB backup
@@ -27,10 +27,10 @@
   sudo: yes
   
 - name: Create a new database with name 'jira'
-  mysql_db: name=jira state=present login_user=root login_password=root
+  mysql_db: name=jira state=present login_user={{ mysqlUser }} login_password={{ mysqlPasswd }}
   
 - name: Imports jira.sql similiar to mysql
-  mysql_db: state=import name=jira target=/tmp/jira.sql login_user=root login_password=root
+  mysql_db: state=import name=jira target=/tmp/jira.sql login_user={{ mysqlUser }} login_password={{ mysqlPasswd }}
   
 - name: Set the FireWall Stop
   raw: /etc/init.d/iptables stop
