@@ -1,14 +1,14 @@
 ---
 
-- name: Install the latest version of MySQL Server
-  yum: name=mysql-server state=latest
+# - name: Install the latest version of MySQL Server
+  # yum: name=mysql-server state=latest
 
-- name: Start MySQL Server
-  raw: /sbin/service mysqld start
-  sudo: yes
+# - name: Start MySQL Server
+  # raw: /sbin/service mysqld start
+  # sudo: yes
   
-- name: Install the latest version of MySQL Python
-  yum: name=MySQL-python state=latest
+# - name: Install the latest version of MySQL Python
+  # yum: name=MySQL-python state=latest
   
 - name: Copy Jira DB backuo
   template: src=jira.sql.j2
