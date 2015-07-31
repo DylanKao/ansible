@@ -10,35 +10,35 @@
 # - name: Install the latest version of MySQL Python
   # yum: name=MySQL-python state=latest
   
-- name: Copy Jira DB backup
-  template: src=jira.sql
-            dest=/tmp/jira.sql owner=root group=root  mode=0777
-  sudo: yes
+# - name: Copy Jira DB backup
+  # template: src=jira.sql
+            # dest=/tmp/jira.sql owner=root group=root  mode=0777
+  # sudo: yes
   
-- name: Imports jira.sql similiar to mysql
-  mysql_db: state=import name=jira target=/tmp/jira.sql
+# - name: Imports jira.sql similiar to mysql
+  # mysql_db: state=import name=jira target=/tmp/jira.sql
 
 # - name: set the mysql root password
   # mysql_user: name=root
               # password=root1
               # host=localhost
 
-# - name: Download Jira
-  # get_url: url={{ jiraUrl }}
-           # dest=/tmp
-  # sudo: yes
+- name: Download Jira
+  get_url: url={{ jiraUrl }}
+           dest=/tmp
+  sudo: yes
 
-# - name: Set Perms on Jira File
-  # file: path=/tmp/{{ jiraExec }}
-        # owner=root
-        # group=root
-        # mode=0777  
-  # sudo: yes
+- name: Set Perms on Jira File
+  file: path=/tmp/{{ jiraExec }}
+        owner=root
+        group=root
+        mode=0777  
+  sudo: yes
  
-# - name: Copy Jira Template
-  # template: src=response.varfile.j2
-            # dest=/tmp/response.varfile
-  # sudo: yes
+- name: Copy Jira Template
+  template: src=response.varfile.j2
+            dest=/tmp/response.varfile
+  sudo: yes
 
 # - name: Install Jira
   # raw: /tmp/{{ jiraExec }} -q -varfile /tmp/response.varfile
