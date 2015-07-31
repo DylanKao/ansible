@@ -12,7 +12,7 @@
 
 - name: set the mysql root password
   mysql_user: name=root
-              password=root
+              password=root1
               host=localhost
 
 # - name: Download Jira
