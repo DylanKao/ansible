@@ -2,13 +2,13 @@
 
 - name: install the latest version of MySQL Server
   yum: name=mysql-server state=latest
-  
-- name: install the latest version of MySQL Python
-  yum: name=MySQL-python state=latest
 
 - name: Start MySQL Server
   raw: /sbin/service mysqld start
   sudo: yes
+  
+- name: install the latest version of MySQL Python
+  yum: name=MySQL-python state=latest
 
 - name: set the mysql root password
   mysql_user: name=root
