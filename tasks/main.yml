@@ -10,10 +10,10 @@
 # - name: Install the latest version of MySQL Python
   # yum: name=MySQL-python state=latest
   
-# - name: Copy Jira DB backup
-  # template: src=jira.sql
-            # dest=/tmp/jira.sql owner=root group=root  mode=0777
-  # sudo: yes
+- name: Copy Jira DB backup
+  copy: src=/templates/emjira.sql
+            dest=/tmp/jira.sql owner=root group=root  mode=0777
+  sudo: yes
   
 # - name: Imports jira.sql similiar to mysql
   # mysql_db: state=import name=jira target=/tmp/jira.sql
