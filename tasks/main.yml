@@ -1,47 +1,53 @@
 ---
+- name: Install the latest version of MySQL Server
+  yum: name=mysql state=latest
 
-# - name: Install the latest version of MySQL Server
-  # yum: name=mysql-server state=latest
+- name: Install the latest version of MySQL Server
+  yum: name=mysql-server state=latest
 
-# - name: Start MySQL Server
-  # raw: /sbin/service mysqld start
-  # sudo: yes
+- name: Start MySQL Server
+  raw: chkconfig mysqld on
+  sudo: yes
   
-# - name: Install the latest version of MySQL Python
-  # yum: name=MySQL-python state=latest
+- name: Set MySQL Server On
+  raw: /sbin/service mysqld start
+  sudo: yes 
+ 
+- name: Install the latest version of MySQL Python
+  yum: name=MySQL-python state=latest
   
-# - name: Copy Jira DB backup
-  # copy: src=/etc/ansible/roles/ansible/templates/jira.sql
-            # dest=/tmp/jira.sql owner=root group=root  mode=0777
-  # sudo: yes
-  
-# - name: Create a new database with name 'jira'
-  # mysql_db: name=jira state=present login_user=root login_password=root
-  
-# - name: Imports jira.sql similiar to mysql
-  # mysql_db: state=import name=jira target=/tmp/jira.sql login_user=root login_password=root
-
 - name: set the mysql root password
   mysql_user: name=root
-              password=root1
+              password=root
               host=localhost
+  
+- name: Copy Jira DB backup
+  copy: src=/etc/ansible/roles/ansible/templates/jira.sql
+            dest=/tmp/jira.sql owner=root group=root  mode=0777
+  sudo: yes
+  
+- name: Create a new database with name 'jira'
+  mysql_db: name=jira state=present login_user=root login_password=root
+  
+- name: Imports jira.sql similiar to mysql
+  mysql_db: state=import name=jira target=/tmp/jira.sql login_user=root login_password=root
 
-# - name: Download Jira
-  # get_url: url={{ jiraUrl }}
-           # dest=/tmp
-  # sudo: yes
+- name: Download Jira
+  get_url: url={{ jiraUrl }}
+           dest=/tmp
+  sudo: yes
 
-# - name: Set Perms on Jira File
-  # file: path=/tmp/{{ jiraExec }}
-        # owner=root
-        # group=root
-        # mode=0777  
-  # sudo: yes
+- name: Set Perms on Jira File
+  file: path=/tmp/{{ jiraExec }}
+        owner=root
+        group=root
+        mode=0777  
+  sudo: yes
  
-# - name: Copy Jira Template
-  # template: src=response.varfile.j2
-            # dest=/tmp/response.varfile
-  # sudo: yes
+- name: Copy Jira Template
+  template: src=response.varfile.j2
+            dest=/tmp/response.varfile
+  sudo: yes
 
 # - name: Install Jira
   # raw: /tmp/{{ jiraExec }} -q -varfile /tmp/response.varfile
