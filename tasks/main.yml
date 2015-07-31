@@ -1,93 +1,93 @@
-# ---
-# - name: Install the latest version of MySQL
-  # yum: name=mysql state=latest
+---
+- name: Install the latest version of MySQL
+  yum: name=mysql state=latest
 
-# - name: Install the latest version of MySQL Server
-  # yum: name=mysql-server state=latest
+- name: Install the latest version of MySQL Server
+  yum: name=mysql-server state=latest
 
-# - name: Start MySQL Server
-  # raw: chkconfig mysqld on
-  # sudo: yes
+- name: Start MySQL Server
+  raw: chkconfig mysqld on
+  sudo: yes
   
-# - name: Set MySQL Server On
-  # raw: /sbin/service mysqld start
-  # sudo: yes 
+- name: Set MySQL Server On
+  raw: /sbin/service mysqld start
+  sudo: yes 
  
-# - name: Install the latest version of MySQL Python
-  # yum: name=MySQL-python state=latest
+- name: Install the latest version of MySQL Python
+  yum: name=MySQL-python state=latest
   
-# - name: Set the mysql root password
-  # mysql_user: name={{ mysqlUser }}
-              # password={{ mysqlPasswd }}
-              # host=localhost
+- name: Set the mysql root password
+  mysql_user: name={{ mysqlUser }}
+              password={{ mysqlPasswd }}
+              host=localhost
   
-- name: Copy db backup
-  template: src={{ porjectHome }}/templates/jira.sql dest=/tmp/jira.sql owner=root group=root  mode=0777
+- name: Copy jira DB backup
+  copy: src={{ porjectHome }}/templates/jira.sql dest=/tmp/jira.sql owner=root group=root  mode=0777
   
-# - name: Create a new database with name 'jira'
-  # mysql_db: name=jira state=present login_user={{ mysqlUser }} login_password={{ mysqlPasswd }}
+- name: Create a new database with name 'jira'
+  mysql_db: name=jira state=present login_user={{ mysqlUser }} login_password={{ mysqlPasswd }}
   
-# - name: Imports jira.sql similiar to mysql
-  # mysql_db: state=import name=jira target=/tmp/jira.sql login_user={{ mysqlUser }} login_password={{ mysqlPasswd }}
+- name: Imports jira.sql similiar to mysql
+  mysql_db: state=import name=jira target=/tmp/jira.sql login_user={{ mysqlUser }} login_password={{ mysqlPasswd }}
   
-# - name: Set the FireWall Stop
-  # raw: /etc/init.d/iptables stop
-  # sudo: yes 
+- name: Set the FireWall Stop
+  raw: /etc/init.d/iptables stop
+  sudo: yes 
   
-# - name: Set the IPTables Off
-  # raw: chkconfig iptables off
-  # sudo: yes 
+- name: Set the IPTables Off
+  raw: chkconfig iptables off
+  sudo: yes 
 
-# - name: Download Jira
-  # get_url: url={{ jiraUrl }}
-           # dest=/tmp
-  # sudo: yes
+- name: Download Jira
+  get_url: url={{ jiraUrl }}
+           dest=/tmp
+  sudo: yes
 
-# - name: Set Perms on Jira File
-  # file: path=/tmp/{{ jiraExec }}
-        # owner=root
-        # group=root
-        # mode=0777  
-  # sudo: yes
+- name: Set Perms on Jira File
+  file: path=/tmp/{{ jiraExec }}
+        owner=root
+        group=root
+        mode=0777  
+  sudo: yes
  
-# - name: Copy Jira Template
-  # template: src=response.varfile.j2
-            # dest=/tmp/response.varfile
-  # sudo: yes
+- name: Copy Jira Template
+  template: src=response.varfile.j2
+            dest=/tmp/response.varfile
+  sudo: yes
 
-# - name: Install Jira
-  # raw: /tmp/{{ jiraExec }} -q -varfile /tmp/response.varfile
-  # sudo: yes
+- name: Install Jira
+  raw: /tmp/{{ jiraExec }} -q -varfile /tmp/response.varfile
+  sudo: yes
 
-# - name: Copy Jira init.d File
-  # template: src=jira.init.d.j2
-            # dest=/etc/init.d/jira
-  # sudo: yes
+- name: Copy Jira init.d File
+  template: src=jira.init.d.j2
+            dest=/etc/init.d/jira
+  sudo: yes
 
 
-# Doesn't appear to be working yet
+Doesn't appear to be working yet
 
-# - name: Copy Jira dbconfig File
-  # template: src=dbconfig.xml.j2 dest={{ jiraHome }}/dbconfig.xml
-        # owner=root	
-        # group=root	
-        # mode=0777
-  # sudo: yes
+- name: Copy Jira dbconfig File
+  template: src=dbconfig.xml.j2 dest={{ jiraHome }}/dbconfig.xml
+        owner=root	
+        group=root	
+        mode=0777
+  sudo: yes
   
-# - name: Download MySQL Connector
-  # get_url: url={{ mysqlConnectorUrl }}
-           # dest={{ jiraData }}/lib/{{ mysqlConnectorJar }}
-  # sudo: yes
+- name: Download MySQL Connector
+  get_url: url={{ mysqlConnectorUrl }}
+           dest={{ jiraData }}/lib/{{ mysqlConnectorJar }}
+  sudo: yes
 
-# - name: stop jira
-  # raw: /etc/init.d/jira stop
-  # sudo: yes
+- name: stop jira
+  raw: /etc/init.d/jira stop
+  sudo: yes
 
-# - name: simulate long running op (15 sec), wait for up to 45 sec, poll every 5 sec
-  # command: /bin/sleep 30
-  # async: 75
-  # poll: 5
+- name: simulate long running op (15 sec), wait for up to 45 sec, poll every 5 sec
+  command: /bin/sleep 30
+  async: 75
+  poll: 5
 
-# - name: start jira
-  # raw: /etc/init.d/jira start
-  # sudo: yes
+- name: start jira
+  raw: /etc/init.d/jira start
+  sudo: yes
