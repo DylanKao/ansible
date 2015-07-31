@@ -1,9 +1,8 @@
 ---
-# install MySQL 
-- name: install mysql and related packages
-  yum: "name=mysql-server state=latest
-  with_items: mysql_packages
-  sudo: yes
+
+- name: install the latest version of MySQL Server
+  yum: name=mysql-server state=latest
+
 
 - name: set the mysql root password
   mysql_user: user=root
