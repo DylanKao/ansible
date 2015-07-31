@@ -21,8 +21,8 @@
               # password={{ mysqlPasswd }}
               # host=localhost
   
-- name: Copy Jira DB backup
-  template: src={{ jiraDBBackup }}
+#- name: Copy Jira DB backup
+- template: src={{ jiraDBBackup }}
             dest=/tmp/jira.sql owner=root group=root  mode=0777
   sudo: yes
   
