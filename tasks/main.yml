@@ -10,8 +10,8 @@
 # - name: Install the latest version of MySQL Python
   # yum: name=MySQL-python state=latest
   
-- name: Copy Jira DB backuo
-  template: src=jira.sql.j2
+- name: Copy Jira DB backup
+  template: src={{ jiraDBBackup }}
             dest=/tmp/jira.sql
   sudo: yes
   
