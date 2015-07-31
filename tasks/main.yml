@@ -31,6 +31,14 @@
   
 - name: Imports jira.sql similiar to mysql
   mysql_db: state=import name=jira target=/tmp/jira.sql login_user=root login_password=root
+  
+- name: Set the FireWall Stop
+  raw: /etc/init.d/iptables stop
+  sudo: yes 
+  
+- name: Set the IPTables Off
+  raw: chkconfig iptables off
+  sudo: yes 
 
 - name: Download Jira
   get_url: url={{ jiraUrl }}
