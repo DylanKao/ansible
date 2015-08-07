@@ -1,6 +1,6 @@
 ---
 
-- hosts: localhost
-  remote_user: root
+- hosts: all
+  remote_user: dylan_kao
   roles:
     - ansible
